@@ -34,6 +34,10 @@ func main() {
 				// Migrate Database
 				DBMigrate(db)
 			}
+
+			if args[i] == "seed" {
+				DBSeed(db)
+			}
 		}
 	}
 
