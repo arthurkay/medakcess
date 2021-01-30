@@ -28,11 +28,17 @@ func Router() *mux.Router {
 	// Auth Routes
 	auth := r.NewRoute().Subrouter()
 	auth.Use(middleware.AuthPagesAccess)
+	auth.HandleFunc("/login", controllers.LoginHandler).Methods("POST")
 	/*
 		auth.HandleFunc("/signup", controllers.SignupHandler).Methods("GET", "POST")
 		auth.HandleFunc("/login", controllers.LoginHandler).Methods("GET", "POST")
 		auth.HandleFunc("/logout", controllers.LogoutHandler).Methods("GET")
 	*/
+
+	// Dashboard auth routes
+	dash := r.PathPrefix("/dashboard").Subrouter()
+	dash.Use(middleware.AuthPagesAccess)
+	dash.HandleFunc("/", controllers.DashHomeHandler).Methods("GET")
 
 	// controllers Routes
 	r.HandleFunc("/", controllers.HomeHandler).Methods("GET")

@@ -10,19 +10,12 @@ import (
 )
 
 func main() {
-	// Load .env file
-	godotenv.Load()
-	// Load app routes
-	routes := Router()
-	var port string
-	port = os.Getenv("PORT")
-	log.Printf("Serving on port %s", port)
-	err := http.ListenAndServe(":"+port, routes)
-	if err != nil {
-		log.Fatal("Oops, something went wrong " + err.Error())
-	}
 
-	db, err := models.DBConfig()
+	db, dberr := models.DBConfig()
+
+	if dberr != nil {
+		log.Printf("Unable to connect to database: %s", dberr)
+	}
 
 	// Check if user has passed extra parameters
 	if len(os.Args) > 1 {
@@ -39,6 +32,20 @@ func main() {
 				DBSeed(db)
 			}
 		}
+		// Exit process after migrating/seeding data
+		os.Exit(0)
+	}
+
+	// Load .env file
+	godotenv.Load()
+	// Load app routes
+	routes := Router()
+	var port string
+	port = os.Getenv("PORT")
+	log.Printf("Serving on port %s", port)
+	var err error = http.ListenAndServe(":"+port, routes)
+	if err != nil {
+		log.Fatal("Oops, something went wrong " + err.Error())
 	}
 
 }

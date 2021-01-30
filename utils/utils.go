@@ -3,9 +3,12 @@ package utils
 import (
 	"fmt"
 	"log"
+	"medakcess/models"
 	"net/http"
 	"os"
 	"path/filepath"
+
+	"gorm.io/gorm"
 
 	"github.com/gorilla/securecookie"
 )
@@ -23,10 +26,25 @@ func AppFilePath(fpath string) string {
 	return filepath.Join(appPath, fpath)
 }
 
-func GetUserID(request *http.Request) (string, error) {
-	userid := ""
-	if cookie, err := request.Cookie("session"); err == nil {
-		cookieValue := make(map[string]string)
+func SetCookieHandler(w http.ResponseWriter, r *http.Request, user models.User) {
+	value := map[string]uint{
+		"session": user.ID,
+	}
+	if encoded, err := cookie_handler.Encode("session", value); err == nil {
+		cookie := &http.Cookie{
+			Name:  "session",
+			Value: encoded,
+			Path:  "/",
+		}
+
+		http.SetCookie(w, cookie)
+	}
+}
+
+func GetUserID(r *http.Request) (uint, error) {
+	var userid uint
+	if cookie, err := r.Cookie("session"); err == nil {
+		cookieValue := make(map[string]uint)
 		err = cookie_handler.Decode("session", cookie.Value, &cookieValue)
 		userid = cookieValue["uid"]
 		if err != nil {
@@ -47,4 +65,14 @@ type TemplateRenderer struct {
 	PageTitle string      // Web page title
 	UserName  string      // Logged In User
 	Data      interface{} // Misc data
+}
+
+func FindUserByEmail(db *gorm.DB, email string) (*models.User, error) {
+	var user models.User
+	result := db.Where("Email = ?", email).Find(&user)
+	if result.RowsAffected == 0 {
+		return nil, fmt.Errorf("Unable to find user with %s email", email)
+	} else {
+		return &user, nil
+	}
 }

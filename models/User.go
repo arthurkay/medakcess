@@ -16,6 +16,6 @@ type User struct {
 	LastName   string `gorm:"type: varchar(150);not null"`
 	Email      string `gorm:"type: varchar(100);unique_index;not null"`
 	Password   string
-	UserTypeID int `gorm:"not null"`
+	UserTypeID uint `gorm:"not null"`
 	UserType   UserType
 }
