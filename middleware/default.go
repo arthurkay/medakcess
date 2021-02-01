@@ -12,7 +12,7 @@ func AuthPagesAccess(next http.Handler) http.Handler {
 		uid, err := utils.GetUserID(r)
 		if err == nil {
 			// User is logged in, do not show pages
-			log.Printf("User has a cookie. %s", uid)
+			log.Printf("User has a cookie. %d", uid)
 			http.Redirect(w, r, "/dashboard", http.StatusFound)
 		} else {
 			// User is not logged in, show pages
@@ -25,6 +25,12 @@ func AuthPagesAccess(next http.Handler) http.Handler {
 
 func Authorised(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// TODO: Check if user is authenticted
+		_, err := utils.GetUserID(r)
+		if err != nil {
+			// User has no session, take them to home page
+			http.Redirect(w, r, "/", http.StatusFound)
+		} else {
+			next.ServeHTTP(w, r)
+		}
 	})
 }

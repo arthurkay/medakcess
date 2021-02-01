@@ -11,6 +11,20 @@ func DBMigrate(db *gorm.DB) error {
 	return db.AutoMigrate(
 		&models.User{},
 		&models.UserType{},
+		&models.Patient{},
+		&models.NextOfKeen{},
+		&models.Vitals{},
+		&models.Triage{},
+		&models.Booking{},
+		&models.Specimen{},
+		&models.Blood{},
+		&models.FBC{},
+		&models.Urine{},
+		&models.Urinalysis{},
+		&models.UrineMCS{},
+		&models.Stool{},
+		&models.StoolMCS{},
+		&models.Other{},
 	)
 }
 

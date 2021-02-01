@@ -11,7 +11,7 @@ import (
 
 func Router() *mux.Router {
 	r := mux.NewRouter()
-	r.StrictSlash(false)
+	r.StrictSlash(true)
 
 	// serving static files
 	staticFileDirectory := http.Dir(utils.AppFilePath("assets/"))
@@ -27,7 +27,7 @@ func Router() *mux.Router {
 
 	// Auth Routes
 	auth := r.NewRoute().Subrouter()
-	auth.Use(middleware.AuthPagesAccess)
+	// auth.Use(middleware.AuthPagesAccess)
 	auth.HandleFunc("/login", controllers.LoginHandler).Methods("POST")
 	/*
 		auth.HandleFunc("/signup", controllers.SignupHandler).Methods("GET", "POST")
@@ -37,7 +37,8 @@ func Router() *mux.Router {
 
 	// Dashboard auth routes
 	dash := r.PathPrefix("/dashboard").Subrouter()
-	dash.Use(middleware.AuthPagesAccess)
+	// dash.Use(middleware.AuthPagesAccess)
+	dash.Use(middleware.Authorised)
 	dash.HandleFunc("/", controllers.DashHomeHandler).Methods("GET")
 
 	// controllers Routes

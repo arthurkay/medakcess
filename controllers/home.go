@@ -47,17 +47,17 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 					http.Redirect(w, r, "/dashboard", http.StatusFound)
 				} else {
 					log.Print("Incorrect username/password combination")
-					http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
+					http.Redirect(w, r, "/", http.StatusFound)
 				}
 			} else {
 				log.Print("Incorrect username/password combination")
-				http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
+				http.Redirect(w, r, "/", http.StatusFound)
 			}
 		} else {
 			log.Printf("Unable to make database connection: %s", err)
 		}
 	} else {
-		http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
+		http.Redirect(w, r, "/", http.StatusFound)
 	}
 }
 
