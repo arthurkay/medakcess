@@ -30,6 +30,10 @@ func DBMigrate(db *gorm.DB) error {
 
 func DBSeed(db *gorm.DB) {
 	db.Create(&models.UserType{
+		Name: "Admin",
+	})
+
+	db.Create(&models.UserType{
 		Name: "Registry",
 	})
 
@@ -45,7 +49,7 @@ func DBSeed(db *gorm.DB) {
 
 	if passwordErr == nil {
 		db.Create(&models.User{
-			FirstName:  "Arthur Kalikiti",
+			FirstName:  "Arthur",
 			LastName:   "Kalikiti",
 			Email:      "arthur@kalikiti.net",
 			Password:   string(passwordHash),

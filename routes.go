@@ -35,6 +35,11 @@ func Router() *mux.Router {
 		auth.HandleFunc("/logout", controllers.LogoutHandler).Methods("GET")
 	*/
 
+	// Admin auth routes
+	admin := r.PathPrefix("/admin").Subrouter()
+	admin.Use(middleware.AuthAdmin)
+	admin.HandleFunc("/", controllers.AdminHome).Methods("GET")
+
 	// Dashboard auth routes
 	dash := r.PathPrefix("/dashboard").Subrouter()
 	// dash.Use(middleware.AuthPagesAccess)

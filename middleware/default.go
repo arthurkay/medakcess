@@ -34,3 +34,18 @@ func Authorised(next http.Handler) http.Handler {
 		}
 	})
 }
+
+func AuthAdmin(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		userType, err := utils.GetUserType(r)
+		if err == nil {
+			if userType == 1 {
+				next.ServeHTTP(w, r)
+			} else {
+				http.Redirect(w, r, "/dashboard", http.StatusFound)
+			}
+		} else {
+			http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
+		}
+	})
+}

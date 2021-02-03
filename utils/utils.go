@@ -76,3 +76,16 @@ func FindUserByEmail(db *gorm.DB, email string) (*models.User, error) {
 		return &user, nil
 	}
 }
+
+func GetUserType(r *http.Request) (uint, error) {
+	uid, err := GetUserID(r)
+	if err != nil {
+		uid = 0
+		return uid, fmt.Errorf("User not found")
+	} else {
+		db, _ := models.DBConfig()
+		var user models.User
+		db.Find(&user, uid)
+		return user.UserTypeID, nil
+	}
+}

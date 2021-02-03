@@ -9,20 +9,20 @@
     <title>{{ .PageTitle }}</title>
 
     <!-- Scripts -->
-    <script src="assets/js/app.js" defer></script>
+    <script src="/assets/js/app.js" defer></script>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="assets/css/app.css" rel="stylesheet">
-    <!-- <link href="assets/css/sb-admin.css" rel="stylesheet"> --> 
-    <link rel="stylesheet" href="assets/css/material-dashboard.css?v=2.0.0">
+    <link href="/assets/css/app.css" rel="stylesheet">
+    <!-- <link href="/assets/css/sb-admin.css" rel="stylesheet"> --> 
+    <link rel="stylesheet" href="/assets/css/material-dashboard.css?v=2.0.0">
     <!-- Documentation extras -->
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="/assets/css/demo.css" rel="stylesheet" />
 </head>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
