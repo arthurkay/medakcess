@@ -13,7 +13,7 @@ func AuthPagesAccess(next http.Handler) http.Handler {
 		if err == nil {
 			// User is logged in, do not show pages
 			log.Printf("User has a cookie. %d", uid)
-			http.Redirect(w, r, "/dashboard", http.StatusFound)
+			http.Redirect(w, r, "/dashboard/", http.StatusFound)
 		} else {
 			// User is not logged in, show pages
 			log.Printf("Ohh snap! no cookies for ya!, %s", err.Error())
@@ -42,7 +42,7 @@ func AuthAdmin(next http.Handler) http.Handler {
 			if userType == 1 {
 				next.ServeHTTP(w, r)
 			} else {
-				http.Redirect(w, r, "/dashboard", http.StatusFound)
+				http.Redirect(w, r, "/dashboard/", http.StatusFound)
 			}
 		} else {
 			http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)

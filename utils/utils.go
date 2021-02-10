@@ -46,14 +46,14 @@ func GetUserID(r *http.Request) (uint, error) {
 	if cookie, err := r.Cookie("session"); err == nil {
 		cookieValue := make(map[string]uint)
 		err = cookie_handler.Decode("session", cookie.Value, &cookieValue)
-		userid = cookieValue["uid"]
+		userid = cookieValue["session"]
 		if err != nil {
 			return userid, fmt.Errorf("No user session stored in cookie!")
 		}
 	} else {
 		return userid, fmt.Errorf("No user session stored in cookie!")
 	}
-	// fmt.Println(userid)
+	fmt.Println(userid)
 	return userid, nil
 }
 
@@ -80,12 +80,13 @@ func FindUserByEmail(db *gorm.DB, email string) (*models.User, error) {
 func GetUserType(r *http.Request) (uint, error) {
 	uid, err := GetUserID(r)
 	if err != nil {
-		uid = 0
+		// uid = 0
 		return uid, fmt.Errorf("User not found")
 	} else {
 		db, _ := models.DBConfig()
 		var user models.User
 		db.Find(&user, uid)
+		log.Printf("user is of type: %s", user.UserTypeID)
 		return user.UserTypeID, nil
 	}
 }

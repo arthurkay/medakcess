@@ -29,12 +29,7 @@ func Router() *mux.Router {
 	auth := r.NewRoute().Subrouter()
 	// auth.Use(middleware.AuthPagesAccess)
 	auth.HandleFunc("/login", controllers.LoginHandler).Methods("POST")
-	/*
-		auth.HandleFunc("/signup", controllers.SignupHandler).Methods("GET", "POST")
-		auth.HandleFunc("/login", controllers.LoginHandler).Methods("GET", "POST")
-		auth.HandleFunc("/logout", controllers.LogoutHandler).Methods("GET")
-	*/
-
+	
 	// Admin auth routes
 	admin := r.PathPrefix("/admin").Subrouter()
 	admin.Use(middleware.AuthAdmin)
