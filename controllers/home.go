@@ -3,7 +3,6 @@ package controllers
 import (
 	"html/template"
 	"log"
-	"medakcess/models"
 	"medakcess/utils"
 	"net/http"
 	"path"
@@ -36,8 +35,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			password string = r.FormValue("password")
 			// userModel *models.User
 		)
-		db, err := models.DBConfig()
-		if err == nil {
+
+		if dberr == nil {
 			userModel, dataErr := utils.FindUserByEmail(db, email)
 			if dataErr == nil {
 				passErr := bcrypt.CompareHashAndPassword([]byte(userModel.Password), []byte(password))
@@ -54,7 +53,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 				http.Redirect(w, r, "/", http.StatusFound)
 			}
 		} else {
-			log.Printf("Unable to make database connection: %s", err)
+			log.Printf("Unable to make database connection: %s", dberr)
 		}
 	} else {
 		http.Redirect(w, r, "/", http.StatusFound)

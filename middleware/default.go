@@ -10,14 +10,17 @@ import (
 func AuthPagesAccess(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		uid, err := utils.GetUserID(r)
+		log.Printf("UserID: %d", uid)
 		if err == nil {
 			// User is logged in, do not show pages
 			log.Printf("User has a cookie. %d", uid)
-			http.Redirect(w, r, "/dashboard/", http.StatusFound)
+			next.ServeHTTP(w, r)
+			return
 		} else {
 			// User is not logged in, show pages
 			log.Printf("Ohh snap! no cookies for ya!, %s", err.Error())
-			next.ServeHTTP(w, r)
+			http.Redirect(w, r, "/", http.StatusFound)
+			return
 		}
 
 	})
@@ -45,7 +48,7 @@ func AuthAdmin(next http.Handler) http.Handler {
 				http.Redirect(w, r, "/dashboard/", http.StatusFound)
 			}
 		} else {
-			http.Redirect(w, r, r.Header.Get("Referer"), http.StatusFound)
+			http.Redirect(w, r, "/", http.StatusFound)
 		}
 	})
 }

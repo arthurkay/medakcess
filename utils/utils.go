@@ -86,7 +86,7 @@ func GetUserType(r *http.Request) (uint, error) {
 		db, _ := models.DBConfig()
 		var user models.User
 		db.Find(&user, uid)
-		log.Printf("user is of type: %s", user.UserTypeID)
+		log.Printf("user is of type: %d", user.UserTypeID)
 		return user.UserTypeID, nil
 	}
 }

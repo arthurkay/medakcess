@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="/assets/css/app.css" rel="stylesheet">
+    <link href="/assets/css/medakcess.css" rel="stylesheet">
     <!-- <link href="/assets/css/sb-admin.css" rel="stylesheet"> --> 
     <link rel="stylesheet" href="/assets/css/material-dashboard.css?v=2.0.0">
     <!-- Documentation extras -->
