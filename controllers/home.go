@@ -21,6 +21,7 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		View:      utils.AppFilePath("templates/home.html"),
 		Hview:     utils.AppFilePath("templates/layouts/header.tpl"),
 		Fview:     utils.AppFilePath("templates/layouts/footer.tpl"),
+		UserName:  GetUserName(r),
 		PageTitle: "MedAkcess | Welcome",
 	}
 
@@ -66,6 +67,7 @@ func DashHomeHandler(w http.ResponseWriter, r *http.Request) {
 		Hview:     utils.AppFilePath("templates/layouts/header.tpl"),
 		Fview:     utils.AppFilePath("templates/layouts/footer.tpl"),
 		PageTitle: "Dashboard Home | MedAkcess",
+		UserName:  GetUserName(r),
 	}
 
 	tmpl := template.Must(template.ParseFiles(data.View, data.Hview, data.Fview))

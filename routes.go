@@ -29,14 +29,14 @@ func Router() *mux.Router {
 	auth := r.NewRoute().Subrouter()
 	// auth.Use(middleware.AuthPagesAccess)
 	auth.HandleFunc("/login", controllers.LoginHandler).Methods("POST")
-	
+
 	// Admin auth routes
 	admin := r.PathPrefix("/admin").Subrouter()
 	admin.Use(middleware.AuthAdmin)
 	admin.HandleFunc("/", controllers.AdminHome).Methods("GET")
 	admin.HandleFunc("/users", controllers.Users).Methods("GET")
 	admin.HandleFunc("/user", controllers.CreateUser).Methods("GET", "POST")
-	admin.HandleFunc("/user/:id", controllers.UpdateUser).Methods("GET", "PUT","DELETE")
+	admin.HandleFunc("/user/:id", controllers.UpdateUser).Methods("GET", "PUT", "DELETE")
 
 	// Dashboard auth routes
 	dash := r.PathPrefix("/dashboard").Subrouter()
@@ -46,6 +46,9 @@ func Router() *mux.Router {
 
 	// controllers Routes
 	r.HandleFunc("/", controllers.HomeHandler).Methods("GET")
+
+	// datatable test
+	r.HandleFunc("/datatable", controllers.GetAllUsers).Methods("POST", "GET")
 
 	return r
 }

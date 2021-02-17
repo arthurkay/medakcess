@@ -20,3 +20,10 @@ func GetAllUsers(db *gorm.DB, r *http.Request) ([]models.User, error) {
 		return users, nil
 	}
 }
+
+func GetUserTypes() []models.UserType {
+	db, _ := models.DBConfig()
+	var userTypes []models.UserType
+	db.Find(&userTypes)
+	return userTypes
+}

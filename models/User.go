@@ -15,7 +15,7 @@ type User struct {
 	MiddleName string
 	LastName   string `gorm:"type: varchar(150);not null"`
 	Email      string `gorm:"type: varchar(100);unique_index;not null"`
-	Password   string
-	UserTypeID uint `gorm:"not null"`
+	Password   string `json:"-"`
+	UserTypeID uint   `gorm:"not null"`
 	UserType   UserType
 }

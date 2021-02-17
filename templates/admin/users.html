@@ -3,12 +3,90 @@
             <div class="row">
                 <h4> MedAkcess Admin Home </h4>
             </div>
-            <div class="row d-flex justify-content-center">
-               <h3> Platform Users </h3>
-            </div>
+           
             <div class="row d-flex justify-content-center">
                 <h3> Create User </h3>
+                <div class="col-md-8 card">
+                    <form method="POST" action="#">
+                        <div class="form-group row">
+                            <label for="fname" class="col-md-4 col-form-label text-md-right">First Name </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="fname" id="fname" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="mname" class="col-md-4 col-form-label text-md-right">Middle Name </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="mname" id="mname" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lname" class="col-md-4 col-form-label text-md-right">Last Name </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="lname" id="lname" required />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control" name="email" value="" required autocomplete="email" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password1" class="col-md-4 col-form-label text-md-right">Password</label>
+
+                            <div class="col-md-6">
+                                <input id="password1" type="password" class="form-control" name="password1" required autocomplete="current-password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Repeat Password</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="usertype" class="col-md-4 col-form-label text-md-right">User Type</label>
+
+                            <div class="col-md-6">
+                               <select>
+                                   {{ range $i, $slice := .Data.usertypes }}
+                                    <option id="{{ $i }}">{{ $slice.Name }}</option>
+                                   {{ end }}
+                               </select>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
+
+            <div class="row d-flex justify-content-center">
+                <h3> Platform Users </h3>
+                <div class="col-md-8 card">
+                 <table class="med-datatable display" style="width:100%" >
+                     <thead>
+                     <tr>
+                         <th>First Name</th>
+                         <th>Middle Name</th>
+                         <th>Last Name</th>
+                         <th>Email</th>
+                     </tr>
+                     </thead>
+                     <tfoot>
+                     <tr>
+                         <th>First Name</th>
+                         <th>Middle Name</th>
+                         <th>Last Name</th>
+                         <th>Email</th>
+                     </tr>
+                     </tfoot>
+                 </table>
+                </div>
+             </div>
         </main>
     </div>
 {{ template "footer". }}

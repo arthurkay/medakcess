@@ -77,6 +77,16 @@ func FindUserByEmail(db *gorm.DB, email string) (*models.User, error) {
 	}
 }
 
+func FindUserById(db *gorm.DB, id uint) (*models.User, error) {
+	var user models.User
+	result := db.Find(&user, id)
+	if result.RowsAffected == 0 {
+		return &user, fmt.Errorf("Unable to get User details")
+	} else {
+		return &user, nil
+	}
+}
+
 func GetUserType(r *http.Request) (uint, error) {
 	uid, err := GetUserID(r)
 	if err != nil {

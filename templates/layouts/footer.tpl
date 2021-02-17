@@ -14,6 +14,27 @@
 <script src="/assets/js/material-dashboard.js?v=2.0.0"></script>
 <!-- demo init -->
 <script src="/assets/js/plugins/demo.js"></script>
+<script src="/assets/js/jquery.dataTables.min.js" defer></script>
+    <script>
+        $(document).ready(function(){
+            var table = $('.med-datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "/datatable",
+                },
+                columns: [
+                    { data: "FirstName" },
+                    { data: "MiddleName" },
+                    { data: "LastName" },
+                    { data: "Email" }
+                ],
+                pageLength: 10,
+                responsive: true,
+            });
+
+        });
+    </script>
 <style>
 /* Center the loader */
 #loader {

@@ -24,11 +24,12 @@
     <!-- Documentation extras -->
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="/assets/css/demo.css" rel="stylesheet" />
+    <link href="/assets/css/jquery.dataTables.min.css" rel="stylesheet" />
 </head>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand" href="/dashboard">
                     MedAkcess<i class="fa fa-paper-plane-o" style="font-size:36px;color: teal;"></i>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +39,7 @@
                     <ul class="navbar-nav ml-auto">
                       
                     </ul>
-                
+                {{ .UserName }}
             </div>
         </nav>
 
