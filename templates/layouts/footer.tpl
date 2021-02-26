@@ -18,8 +18,6 @@
     <script>
         $(document).ready(function(){
             var table = $('.med-datatable').DataTable({
-                processing: true,
-                serverSide: true,
                 ajax: {
                     url: "/datatable",
                 },

@@ -53,7 +53,9 @@ func DBSeed(db *gorm.DB) {
 			LastName:   "Kalikiti",
 			Email:      "arthur@kalikiti.net",
 			Password:   string(passwordHash),
-			UserTypeID: 3,
+			UserTypeID: 1,
 		})
+	} else {
+		panic("Unable to create password hash")
 	}
 }
