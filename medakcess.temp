@@ -1,0 +1,13 @@
+[Unit]
+Description=Medakcess 
+After=network.target
+
+[Service]
+User=arthur
+WorkingDirectory=/home/arthur/Documents/Dev/ProDev/medakcess
+ExecStart=/bin/bash -c /home/arthur/Documents/Dev/ProDev/medakcess/medakcess
+Restart=on-abort
+RestartSec=15s
+
+[Install]
+WantedBy=multi-user.target
