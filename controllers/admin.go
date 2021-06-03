@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"html/template"
 	"log"
+	"medakcess/models"
 	"medakcess/utils"
 	"net/http"
+	"strconv"
 )
 
 func AdminHome(w http.ResponseWriter, r *http.Request) {
@@ -55,8 +57,27 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		UserName:  GetUserName(r),
 	}
 
-	tmpl := template.Must(template.ParseFiles(data.View, data.Hview, data.Fview))
-	tmpl.Execute(w, data)
+	if r.Method == "POST" {
+		db, err := models.DBConfig()
+		if err != nil {
+			panic("System unable to get database instance")
+		} else {
+			password, _ := utils.BcryptHash("Test@321")
+			usertype, _ := strconv.Atoi(r.PostForm.Get("usertype"))
+			db.Create(&models.User{
+				FirstName:  r.PostForm.Get("fname"),
+				MiddleName: r.PostForm.Get("mname"),
+				LastName:   r.PostForm.Get("lname"),
+				Email:      r.PostForm.Get("email"),
+				Password:   string(password),
+				UserTypeID: uint(usertype),
+			})
+		}
+	} else {
+		tmpl := template.Must(template.ParseFiles(data.View, data.Hview, data.Fview))
+		tmpl.Execute(w, data)
+	}
+
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
@@ -73,12 +94,12 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllUsers(w http.ResponseWriter, r *http.Request) {
-	users, error := utils.GetAllUsers(db, r)
-	if error != nil {
+	users, err := utils.GetAllUsers(db, r)
+	if err != nil {
 		fmt.Print("Unable to get users")
 	} else {
-		data, error := json.Marshal(users)
-		if error == nil {
+		data, err := json.Marshal(users)
+		if err == nil {
 			n := len(data)
 			s := string(data[:n])
 			log.Printf("%s", string(data))

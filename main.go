@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"medakcess/models"
+	"medakcess/routes"
 	"net/http"
 	"os"
 
@@ -12,7 +13,6 @@ import (
 func main() {
 
 	db, dberr := models.DBConfig()
-
 	if dberr != nil {
 		log.Printf("Unable to connect to database: %s", dberr)
 	}
@@ -25,11 +25,11 @@ func main() {
 			// If user passed migrate command, migrate database schema
 			if args[i] == "migrate" {
 				// Migrate Database
-				DBMigrate(db)
+				models.DBMigrate(db)
 			}
 
 			if args[i] == "seed" {
-				DBSeed(db)
+				models.DBSeed(db)
 			}
 		}
 		// Exit process after migrating/seeding data
@@ -39,9 +39,8 @@ func main() {
 	// Load .env file
 	godotenv.Load()
 	// Load app routes
-	routes := Router()
-	var port string
-	port = os.Getenv("PORT")
+	routes := routes.Router()
+	port := os.Getenv("PORT")
 	log.Printf("Serving on port %s", port)
 	var err error = http.ListenAndServe(":"+port, routes)
 	if err != nil {

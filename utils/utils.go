@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 
 	"github.com/gorilla/securecookie"
@@ -98,5 +99,14 @@ func GetUserType(r *http.Request) (uint, error) {
 		db.Find(&user, uid)
 		log.Printf("user is of type: %d", user.UserTypeID)
 		return user.UserTypeID, nil
+	}
+}
+
+func BcryptHash(text string) ([]byte, error) {
+	pass, error := bcrypt.GenerateFromPassword([]byte(text), bcrypt.DefaultCost)
+	if error != nil {
+		return nil, fmt.Errorf("Unable to generate pasword hash")
+	} else {
+		return pass, nil
 	}
 }

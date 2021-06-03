@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-// Only show login routes if not logged in
+// AuthPagesAccess Only show login routes if not logged in
 func AuthPagesAccess(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		uid, err := utils.GetUserID(r)
@@ -26,6 +26,7 @@ func AuthPagesAccess(next http.Handler) http.Handler {
 	})
 }
 
+// Authorised checks whether or not the user is authenticated
 func Authorised(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		_, err := utils.GetUserID(r)
@@ -38,6 +39,7 @@ func Authorised(next http.Handler) http.Handler {
 	})
 }
 
+// AuthAdmin authorise admin access
 func AuthAdmin(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		userType, err := utils.GetUserType(r)

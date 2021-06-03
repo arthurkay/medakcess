@@ -1,10 +1,10 @@
 {{ template "header". }}
         <main class="py-4">
             <div class="row">
-                <div class="col-md-6">
-                    <h4>MedAkcess</h4>
+                <div class="col-md-4">
+                   <!--// <h4>MedAkcess</h4> //-->
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <h4> Log In </h4>
 
                     <form method="POST" action="/login">
@@ -24,27 +24,27 @@
                             </div>
                         </div>
 
-                <div class="form-group row">
+                        <div class="col-md-6 offset-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember">
 
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
-
-                            <label class="form-check-label" for="remember">
-                                Remember Me
-                            </label>
+                                <label class="form-check-label" for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="form-group row mb-0">
-                    <div class="col-md-8 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
-                            Login
-                        </button>
-                    </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Login
+                                </button>
+                             </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div class="col-md-4">
+                   <!--// Nothing to Display -->
                 </div>
             </div>
         </main>
