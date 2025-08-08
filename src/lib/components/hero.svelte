@@ -1,6 +1,6 @@
 <script>
     // Placeholder image URL, replace with your actual image path
-    const heroImage = "https://placehold.co/700x500/007bff/ffffff?text=Medical+Hero+Image";
+    const heroImage = "https://medakcess-your-ai-doctor.lovable.app/assets/hero-medical-BXcg5MlF.jpg";
   </script>
   
   <style>

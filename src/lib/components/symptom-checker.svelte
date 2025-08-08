@@ -43,19 +43,21 @@
 
       if (!response.ok) {
               const errorText = await response.text();
+              isAnalyzing = false;
               toast.error("Error: " + (response.statusText || errorText));
               return;
           }
 
           const reader = response.body?.getReader();
           if (!reader) {
+              isAnalyzing = false;
               toast.error("Failed to get reader from response body.");
               return;
           }
 
           const decoder = new TextDecoder();
           let buffer = ''; // Use a buffer to handle partial JSON lines
-
+          currentAssistantMessage = "";
           while (true) {
               const { done, value } = await reader.read();
               if (done) break;
@@ -78,13 +80,14 @@
                               currentAssistantMessage += json.response;
                           }
                       } catch (e: unknown) {
+                          isAnalyzing = false;
                           // Log the error but don't stop the stream for a single malformed line
                           console.warn("Could not parse chunk as JSON:", line, e);
                       }
                   }
               }
           }
-          //currentAssistantMessage = '';
+          isAnalyzing = false
       
       // Simulate API call with a delay
       setTimeout(() => {
