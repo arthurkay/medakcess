@@ -283,10 +283,12 @@
                 {currentAssistantMessage}
               </div>
             {/if}
-            {#if !results}
+            {#if isAnalyzing}
               <div class="text-center py-12 text-muted-foreground">
                 {@html getIcon("Search")}
-                <p class="mt-4">Enter your symptoms above to get an AI analysis</p>
+                <span class="animate-spin">
+                   {@html getIcon("Clock")}
+                </span>
               </div>
             <!--  -->
             {/if}

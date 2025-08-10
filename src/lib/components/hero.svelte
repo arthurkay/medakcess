@@ -1,4 +1,6 @@
 <script>
+	import { goto } from "$app/navigation";
+
     // Placeholder image URL, replace with your actual image path
     const heroImage = "https://medakcess-your-ai-doctor.lovable.app/assets/hero-medical-BXcg5MlF.jpg";
   </script>
@@ -76,12 +78,12 @@
           </p>
   
           <div class="flex flex-col sm:flex-row gap-4 mb-12">
-            <button class="bg-cyan-400 text-gray-900 font-semibold text-lg px-8 py-4 rounded-full shadow-lg hover:bg-cyan-500 transition-colors duration-300">
+            <button class="bg-cyan-400 text-gray-900 font-semibold text-lg px-8 py-4 rounded-full shadow-lg hover:bg-cyan-500 transition-colors duration-300" onclick={() => goto('/chat')}>
               Start Consultation
               <!-- ArrowRight Icon -->
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 ml-2 inline-block"><line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
-            <button class="border-2 border-white text-white font-semibold text-lg px-8 py-4 rounded-full shadow-lg hover:bg-white hover:text-blue-900 transition-colors duration-300">
+            <button class="border-2 border-white text-white font-semibold text-lg px-8 py-4 rounded-full shadow-lg hover:bg-white hover:text-blue-900 transition-colors duration-300" onclick={() => goto('#learn-more')} >
               Learn More
             </button>
           </div>

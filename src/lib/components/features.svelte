@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { goto } from "$app/navigation";
+
     // Svelte's equivalent of a data array to drive the component's content
     const features = [
       {
@@ -199,7 +201,7 @@
       </div>
   
       <!-- CTA Section -->
-      <div class="text-center mt-16 animate-fade-in">
+      <div class="text-center mt-16 animate-fade-in" id="learn-more">
         <div class="card-medical max-w-4xl mx-auto text-center">
           <h3 class="text-2xl sm:text-3xl font-bold text-foreground mb-4">
             Ready to experience the future of healthcare?
@@ -208,10 +210,10 @@
             Join thousands of users who trust MedAccess for their healthcare needs.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button class="btn-medical text-lg px-8 py-4">
+            <button class="btn-medical text-lg px-8 py-4" onclick={() => goto('/chat')} >
               Start Free Trial
             </button>
-            <button class="btn-medical-outline text-lg px-8 py-4">
+            <button class="btn-medical-outline text-lg px-8 py-4" onclick={() => goto('#learn-more')}  >
               Book Consultation
             </button>
           </div>
