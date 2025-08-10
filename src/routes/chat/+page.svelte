@@ -5,10 +5,11 @@
   import { Send, Bot, User, ArrowLeft } from "@lucide/svelte";
   import { goto } from "$app/navigation";
   import { toast } from "svelte-sonner";
-	import { onMount } from "svelte";
+  import { onMount } from "svelte";
 
    let chat: { role: string; content: string }[] = $state([]); // Strongly type chat
   let input = $state('');
+  let bottom: HTMLDivElement; // Reference for scrolling
   let currentAssistantMessage = $state(''); // This will hold the streaming message
   let isLoading = $state(false); // Enable loading state for better UX
 
@@ -86,11 +87,12 @@
     //  chat = JSON.parse(savedChat);
     //}
     chat.push({ role: "assistant", content: "Hello! I'm your MedAkcess AI assistant. I'm here to help you understand your symptoms and provide general medical guidance. Please remember that I cannot replace professional medical advice. How can I assist you today?" }); // Initial message
+    bottom.scrollIntoView({ behavior: "smooth" }); // Scroll to bottom on mount
   })
 
   $effect(() => {
     console.log(`messages changed:`, isLoading);
-    //currentAssistantMessage.scrollIntoView({ behavior: "smooth" });
+    bottom.scrollIntoView({ behavior: "smooth" });
   });
 
   const handleKeyPress = (e: KeyboardEvent) => {
@@ -174,6 +176,7 @@
               </div>
             </div>
           {/if}
+          <div class="h-6" bind:this={bottom}></div> <!-- Spacer for smooth scrolling -->
 
         </div>
 
