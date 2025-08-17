@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from "$app/navigation";
 
     // Svelte's equivalent of a data array to drive the component's content
     const features = [
@@ -210,12 +209,11 @@
             Join thousands of users who trust MedAccess for their healthcare needs.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <button class="btn-medical text-lg px-8 py-4" onclick={() => goto('/chat')} >
-              Start Free Trial
-            </button>
-            <button class="btn-medical-outline text-lg px-8 py-4" onclick={() => goto('#learn-more')}  >
+            <a href="https://polenimed.online/doctaz24_client/home.php?page=book" target="_blank">
+            <button class="btn-medical-outline text-lg px-8 py-4"  >
               Book Consultation
             </button>
+            </a>
           </div>
         </div>
       </div>

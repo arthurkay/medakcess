@@ -81,7 +81,7 @@
         </div>
   
         <!-- Quick Links -->
-        <div>
+        <!-- <div>
           <h3 class="font-semibold text-background mb-4">Quick Links</h3>
           <ul class="space-y-2">
             <li><a href="#features" class="text-background/80 hover:text-primary transition-colors">Features</a></li>
@@ -89,10 +89,10 @@
             <li><a href="#" class="text-background/80 hover:text-primary transition-colors">Find Doctors</a></li>
             <li><a href="#" class="text-background/80 hover:text-primary transition-colors">Health Records</a></li>
           </ul>
-        </div>
+        </div> -->
   
         <!-- Support -->
-        <div>
+        <!-- <div>
           <h3 class="font-semibold text-background mb-4">Support</h3>
           <ul class="space-y-2">
             <li><a href="#" class="text-background/80 hover:text-primary transition-colors">Help Center</a></li>
@@ -100,7 +100,7 @@
             <li><a href="#" class="text-background/80 hover:text-primary transition-colors">Terms of Service</a></li>
             <li><a href="#" class="text-background/80 hover:text-primary transition-colors">DPA Compliance</a></li>
           </ul>
-        </div>
+        </div> -->
       </div>
   
       <div class="border-t border-background/20 mt-12 pt-8 text-center">
@@ -108,11 +108,11 @@
           <p class="text-background/60">
             © 2025 MedAkcess. All rights reserved.
           </p>
-          <div class="flex items-center gap-6">
+          <!-- <div class="flex items-center gap-6">
             <span class="text-background/60 text-sm">Certified Medical AI</span>
             <span class="text-background/60 text-sm">DPA Compliant</span>
             <span class="text-background/60 text-sm">ISO 27001</span>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

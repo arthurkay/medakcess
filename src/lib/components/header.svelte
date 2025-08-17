@@ -101,12 +101,12 @@
   
         <!-- Desktop CTA -->
         <div class="hidden md:flex items-center space-x-4">
-          <button class="btn-ghost text-lg px-6 py-2">
+          <!-- <button class="btn-ghost text-lg px-6 py-2">
             Sign In
           </button>
           <button class="btn-medical text-lg px-6 py-2">
             Get Started
-          </button>
+          </button> -->
         </div>
   
         <!-- Mobile Menu Button -->
