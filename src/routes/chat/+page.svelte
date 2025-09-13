@@ -46,32 +46,37 @@
           let buffer = ''; // Use a buffer to handle partial JSON lines
 
           while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
+            const { done, value } = await reader.read();
+            if (done) break;
 
-              buffer += decoder.decode(value, { stream: true });
+            buffer += decoder.decode(value, { stream: true });
 
-              // Process lines from the buffer
-              const lines = buffer.split('\n');
-              // Keep the last (potentially incomplete) line in the buffer
-              buffer = lines.pop() || '';
+            const lines = buffer.split('\n');
+            buffer = lines.pop() || '';
 
-              for (const line of lines) {
-                  if (line.trim()) {
-                      try {
-                          const json = JSON.parse(line);
-                          // Ollama's stream typically sends 'content' within 'message'
-                          // or directly as 'response' depending on the API endpoint.
-                          // Assuming `json.message.content` as per your observation.
-                          if (json.message && json.message.content) {
-                              currentAssistantMessage += json.message.content;
-                          }
-                      } catch (e: unknown) {
-                          // Log the error but don't stop the stream for a single malformed line
-                          console.warn("Could not parse chunk as JSON:", line, e);
-                      }
+            for (const line of lines) {
+              if (line.trim().startsWith('data:')) {
+                // Remove the "data: " prefix to parse the JSON
+                const data = line.substring(5).trim();
+                if (data === '[DONE]') {
+                  // This signifies the end of the stream
+                  break;
+                }
+                try {
+                  const json = JSON.parse(data);
+                  // OpenAI's stream sends 'content' within 'delta'
+                  // The 'delta' object can be empty at the end of a message
+                  if (json.choices && json.choices[0] && json.choices[0].delta) {
+                    const delta = json.choices[0].delta;
+                    if (delta.content) {
+                      currentAssistantMessage += delta.content;
+                    }
                   }
+                } catch (e) {
+                  console.warn("Could not parse chunk as JSON:", data, e);
+                }
               }
+            }
           }
 
           // After the stream is complete, add the full assistant message to chat

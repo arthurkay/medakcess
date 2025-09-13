@@ -64,7 +64,7 @@ export const POST: RequestHandler = async ({ request }: { request: Request }) =>
                 chatHistory.push({ role: 'user', content: template });
         } */
 
-        const ollamaRes = await fetch(`${env.OLLAMA_HOST}/api/chat`, {
+        const res = await fetch(`${env.INFERENCE_SERVER}/v1/chat/completions`, {
                 method: 'POST',
                 headers: {
                         'Content-Type': 'application/json'
@@ -72,11 +72,15 @@ export const POST: RequestHandler = async ({ request }: { request: Request }) =>
                 body: JSON.stringify({
                         model: env.AI_MODEL || 'medllama2',
                         stream: true,
-                        messages: history
+                        messages: history,
+                        max_tokens: 150,
+                        temperature: 0.7
                 })
         });
 
-        return new Response(ollamaRes.body, {
+        console.log(res)
+
+        return new Response(res.body, {
                 headers: {
                         'Content-Type': 'text/event-stream'
                 }
